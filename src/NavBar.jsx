@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Navbar = () => {
+const NavBar = () => {
   return (
      <div className="navbar bg-gradient-to-br from-base-100 to-base-200 shadow-lg border-b border-opacity-10 border-primary backdrop-blur-sm">
       <div className="flex-1">
@@ -93,4 +93,4 @@ const Navbar = () => {
   )
 }
 
-export default Navbar
+export default NavBar;

@@ -1,6 +1,10 @@
 devtinder-web
-- cerated a vite + react project
-- remove a unecessary code
-- installed the tailwind
-- installed the daisy ui
-- add navbar component to app.jsx 
+- created a Vite + React project
+- removed unnecessary code
+- installed Tailwind
+- installed DaisyUI
+- added Navbar component to App.jsx
+- installed React Router DOM
+- created Body.jsx
+- created BrowserRouter > Routes > Route path="/" > Body > Route children
+- added an Outlet in the Body component
