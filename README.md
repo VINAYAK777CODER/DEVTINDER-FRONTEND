@@ -8,3 +8,7 @@ devtinder-web
 - created Body.jsx
 - created BrowserRouter > Routes > Route path="/" > Body > Route children
 - added an Outlet in the Body component
+- Enhanced login page styling with gradient theme and repositioned card.
+- Enabled CORS with credentials and added withCredentials in Axios for auth.
+- install redux toolkit and react redux- npm install @reduxjs/toolkit react-redux
+- create a configureStore => provider in app.jsx => createSlice => add reducer to store 
