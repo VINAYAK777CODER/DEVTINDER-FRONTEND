@@ -1,5 +1,6 @@
-import React from 'react'
-import { useSelector } from 'react-redux'
+import React from "react";
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 const NavBar = () => {
   const user = useSelector((state) => state.user);
@@ -9,10 +10,10 @@ const NavBar = () => {
       <div className="flex-1">
         <a className="btn btn-ghost px-2 hover:bg-opacity-10 hover:bg-primary transition-all duration-300 group">
           <div className="relative h-10 w-10 mr-2 group-hover:rotate-12 transition-transform duration-500">
-            <img 
-              src="https://img.icons8.com/?size=100&id=FL8t1QCMYTQy&format=png&color=6366F1" 
-              alt="DEVTINDER Logo" 
-              className="absolute h-full w-full object-contain drop-shadow-lg" 
+            <img
+              src="https://img.icons8.com/?size=100&id=FL8t1QCMYTQy&format=png&color=6366F1"
+              alt="DEVTINDER Logo"
+              className="absolute h-full w-full object-contain drop-shadow-lg"
             />
             <div className="absolute inset-0 bg-primary rounded-full opacity-0 group-hover:opacity-10 transition-opacity duration-300"></div>
           </div>
@@ -24,29 +25,38 @@ const NavBar = () => {
 
       <div className="flex gap-3">
         <div className="relative group">
-          <input 
-            type="text" 
-            placeholder="Search developers..." 
-            className="input input-bordered w-32 md:w-64 pl-10 focus:pl-12 pr-4 bg-base-100 bg-opacity-70 focus:bg-opacity-100 focus:shadow-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-300 placeholder-opacity-70" 
+          <input
+            type="text"
+            placeholder="Search developers..."
+            className="input input-bordered w-32 md:w-64 pl-10 focus:pl-12 pr-4 bg-base-100 bg-opacity-70 focus:bg-opacity-100 focus:shadow-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-300 placeholder-opacity-70"
           />
-          <svg 
-            className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400 group-focus-within:text-primary transition-colors duration-300" 
-            fill="none" 
-            stroke="currentColor" 
+          <svg
+            className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400 group-focus-within:text-primary transition-colors duration-300"
+            fill="none"
+            stroke="currentColor"
             viewBox="0 0 24 24"
           >
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+            />
           </svg>
         </div>
 
         {/* Dropdown only if user exists */}
         {user && (
           <div className="dropdown dropdown-end">
-            <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar hover:bg-opacity-10 hover:bg-primary transition-all duration-300 group">
+            <div
+              tabIndex={0}
+              role="button"
+              className="btn btn-ghost btn-circle avatar hover:bg-opacity-10 hover:bg-primary transition-all duration-300 group"
+            >
               <div className="w-10 rounded-full ring-2 ring-primary ring-offset-2 ring-offset-base-100 relative overflow-hidden">
                 <img
                   alt="User profile"
-                  src={user.photo_url} 
+                  src={user.photo_url}
                   className="group-hover:scale-110 transition-transform duration-500"
                 />
                 <div className="absolute inset-0 bg-primary opacity-0 group-hover:opacity-10 transition-opacity duration-300"></div>
@@ -71,10 +81,13 @@ const NavBar = () => {
                 </div>
               </li>
               <li>
-                <a className="justify-between hover:bg-primary hover:text-primary-content transition-colors">
+                <Link
+                  to="/profile"
+                  className="justify-between hover:bg-primary hover:text-primary-content transition-colors"
+                >
                   <span>My Profile</span>
                   <span className="badge badge-primary badge-sm">New</span>
-                </a>
+                </Link>
               </li>
               <li>
                 <a className="hover:bg-primary hover:text-primary-content transition-colors">
@@ -90,8 +103,18 @@ const NavBar = () => {
               <li className="border-t border-opacity-10 mt-1 pt-1">
                 <a className="text-error hover:bg-error hover:text-error-content transition-colors">
                   <span>Logout</span>
-                  <svg className="w-4 h-4 ml-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                  <svg
+                    className="w-4 h-4 ml-auto"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
+                    />
                   </svg>
                 </a>
               </li>
@@ -100,7 +123,7 @@ const NavBar = () => {
         )}
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default NavBar;

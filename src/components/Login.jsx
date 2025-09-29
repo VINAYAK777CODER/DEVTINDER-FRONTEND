@@ -6,27 +6,32 @@ import { useNavigate } from "react-router-dom";
 import { BASE_URL } from "../utils/constants";
 
 const Login = () => {
-  const [emailId, setEmailId] = useState("simran@gmail.com");
-  const [password, setPassword] = useState("Simran@1234");
+  const [emailId, setEmailId] = useState("Nishal@gmail.com");
+  const [password, setPassword] = useState("Nishal@123");
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const handlelogin = async () => {
-    try {
-      const res = await axios.post(
-        BASE_URL + "/login",
-        {
-          emailId,
-          password,
-        },
-        { withCredentials: true }
-      );
+  try {
+    const res = await axios.post(
+      BASE_URL + "/login",
+      { emailId, password },
+      { withCredentials: true }
+    );
 
-      dispatch(addUser(res?.data?.user));
-      return navigate("/feed");
-    } catch (err) {
-      console.log(err);
-    }
-  };
+    // ✅ If login is successful (status 200)
+    dispatch(addUser(res?.data?.user));
+    navigate("/feed");
+  } catch (err) {
+    // ✅ Extract safe message
+    const errorMessage =
+      err?.response?.data?.error || "Something went wrong. Please try again.";
+
+    // ✅ Show on UI or toast instead of console
+    console.error("Login Error:", errorMessage);
+    alert(errorMessage); // (Replace with toast if you are using one)
+  }
+};
+
 
   return (
     <div className="min-h-screen flex items-start justify-center bg-gradient-to-br from-purple-600 via-pink-600 to-red-500 p-4 pt-20">

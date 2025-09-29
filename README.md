@@ -12,3 +12,11 @@ devtinder-web
 - Enabled CORS with credentials and added withCredentials in Axios for auth.
 - install redux toolkit and react redux- npm install @reduxjs/toolkit react-redux
 - create a configureStore => provider in app.jsx => createSlice => add reducer to store 
+- Add Redux DevTools in Chrome
+- Login and verify if user data is stored correctly in Redux store
+- Update NavBar immediately after user logs in
+- Refactor code:
+ - Create a constants file
+ - Create a components folder   
+- Restrict access to protected routes without login
+- If token is missing, redirect user to Login page
