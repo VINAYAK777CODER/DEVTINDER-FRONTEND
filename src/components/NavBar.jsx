@@ -1,9 +1,31 @@
-import React from "react";
-import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import axios from "axios";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { BASE_URL } from "../utils/constants";
+import { removeUser } from "../utils/userSlice";
 
 const NavBar = () => {
+  
+  const navigate=useNavigate();
+  const dispatch=useDispatch();
   const user = useSelector((state) => state.user);
+  const handleLogout=async()=>{
+    try{
+        const res=await axios.post(BASE_URL+"/logout",{},{withCredentials:true});
+        dispatch(removeUser());
+        navigate("/login");
+        // alert(res?.data?.message);
+
+
+    }
+    catch(err)
+    {
+      // direct it to error page 
+      console.log(err);
+
+    }
+  }
 
   return (
     <div className="navbar bg-gradient-to-br from-base-100 to-base-200 shadow-lg border-b border-opacity-10 border-primary backdrop-blur-sm">
@@ -101,7 +123,7 @@ const NavBar = () => {
                 </a>
               </li>
               <li className="border-t border-opacity-10 mt-1 pt-1">
-                <a className="text-error hover:bg-error hover:text-error-content transition-colors">
+                <a onClick={handleLogout} className="text-error hover:bg-error hover:text-error-content transition-colors">
                   <span>Logout</span>
                   <svg
                     className="w-4 h-4 ml-auto"

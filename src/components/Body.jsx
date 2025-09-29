@@ -31,7 +31,7 @@ const Body = () => {
       // ❌ If cookie/session is invalid (expired or missing), redirect to login
       if (err?.response?.status === 401) {
         navigate("/login");
-        alert("Invalid Credentials");
+        // alert("Invalid Credentials");
       } else {
         console.error("Something went wrong:", err);
       }
