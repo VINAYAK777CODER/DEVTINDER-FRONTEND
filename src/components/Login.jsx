@@ -1,36 +1,60 @@
 import axios from "axios";
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { addUser } from "../utils/userSlice";
 import { useNavigate } from "react-router-dom";
 import { BASE_URL } from "../utils/constants";
 
 const Login = () => {
-  const [emailId, setEmailId] = useState("Nishal@gmail.com");
-  const [password, setPassword] = useState("Nishal@123");
-  const [error, setError] = useState("");
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
 
+  // ---------------------- Local State for Form Inputs ----------------------
+  const [emailId, setEmailId] = useState("Nishal@gmail.com");  // Stores email entered by user
+  const [password, setPassword] = useState("Nishal@123");      // Stores password entered by user
+  const [error, setError] = useState("");                      // Stores any login error
+
+  // ---------------------- Redux and Navigation Setup ----------------------
+  const dispatch = useDispatch();                              // Used to update global Redux store
+  const navigate = useNavigate();                              // Used to navigate between pages
+
+  // ---------------------- Access Current User from Redux ------------------
+  const user = useSelector((state) => state.user);             // If user exists -> already logged in
+
+  // ---------------------- Redirect IF Already Logged In -------------------
+  useEffect(() => {
+    if (user) {
+      navigate("/feed");   // Prevent accessing login page after login
+    }
+  }, [user, navigate]);
+
+
+  // ---------------------- Login Handler Function --------------------------
   const handlelogin = async () => {
     try {
+      // Call backend API for login
       const res = await axios.post(
         BASE_URL + "/login",
         { emailId, password },
-        { withCredentials: true }
+        { withCredentials: true } // Important: includes cookies for authentication
       );
 
+      // Save user to Redux store (this keeps user logged in globally)
       dispatch(addUser(res?.data?.user));
+
+      // Redirect to Feed page after successful login
       navigate("/feed");
+
     } catch (err) {
+      // If error happens, show proper error message
       const errorMessage = err?.response?.data?.error || "Something went wrong.";
       setError(errorMessage);
     }
   };
 
+
+  // ---------------------- JSX (UI Rendering) ------------------------------
   return (
     <div className="min-h-screen flex items-start justify-center bg-gradient-to-br from-purple-600 via-pink-600 to-red-500 p-4 pt-16">
-      
+
       {/* Floating Animated Login Card */}
       <div className="w-full max-w-md bg-white/75 backdrop-blur-lg border border-white/20 rounded-3xl shadow-2xl p-8
                       animate-floatCard hover:scale-[1.03] transition-transform duration-700">
@@ -84,8 +108,8 @@ const Login = () => {
             className="w-full py-2 rounded-xl bg-gradient-to-r from-purple-600 to-pink-600
                        text-white font-semibold shadow-lg hover:shadow-xl hover:opacity-95 transition"
             onClick={(e) => {
-              e.preventDefault();
-              handlelogin();
+              e.preventDefault(); // Prevents default form reload behavior
+              handlelogin();      // Calls login function
             }}
           >
             Login
@@ -95,10 +119,7 @@ const Login = () => {
         {/* Signup Link */}
         <p className="text-center text-gray-700 mt-6">
           Don't have an account?{" "}
-          <a
-            href="/signup"
-            className="text-purple-600 font-semibold hover:underline"
-          >
+          <a href="/signup" className="text-purple-600 font-semibold hover:underline">
             Sign up
           </a>
         </p>
@@ -107,7 +128,6 @@ const Login = () => {
       {/* Custom Animations */}
       <style>
         {`
-          /* Smooth fade-in + upward movement */
           @keyframes floatCard {
             0% { opacity: 0; transform: translateY(30px); }
             60% { opacity: 1; transform: translateY(-10px); }
