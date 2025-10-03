@@ -110,12 +110,18 @@ const NavBar = () => {
                   <span>My Profile</span>
                   <span className="badge badge-primary badge-sm">New</span>
                 </Link>
+
               </li>
               <li>
-                <a className="hover:bg-primary hover:text-primary-content transition-colors">
-                  <span>Account Settings</span>
-                </a>
+                <Link
+                  to="/connections"
+                  className="justify-between hover:bg-primary hover:text-primary-content transition-colors"
+                >
+                  <span>My Connections</span>
+                </Link>
+                
               </li>
+              
               <li>
                 <a className="hover:bg-primary hover:text-primary-content transition-colors">
                   <span>Notifications</span>
