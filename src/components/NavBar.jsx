@@ -121,13 +121,22 @@ const NavBar = () => {
                 </Link>
                 
               </li>
-              
               <li>
+                <Link
+                  to="/requests"
+                  className="justify-between hover:bg-primary hover:text-primary-content transition-colors"
+                >
+                  <span>Requests</span>
+                </Link>
+                
+              </li>
+              
+              {/* <li>
                 <a className="hover:bg-primary hover:text-primary-content transition-colors">
                   <span>Notifications</span>
                   <span className="badge badge-sm">3</span>
                 </a>
-              </li>
+              </li> */}
               <li className="border-t border-opacity-10 mt-1 pt-1">
                 <a onClick={handleLogout} className="text-error hover:bg-error hover:text-error-content transition-colors">
                   <span>Logout</span>
